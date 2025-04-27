@@ -5,7 +5,7 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Liberation Mono:pixelsize=12:antialias=true:autohint=true";
+static char *font = "Iosevka Nerd Font:pixelsize=18:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -45,7 +45,7 @@ int allowaltscreen = 1;
 
 /* allow certain non-interactive (insecure) window operations such as:
    setting the clipboard text */
-int allowwindowops = 0;
+int allowwindowops = 1;
 
 /*
  * draw latency range in ms - from new content/keypress/etc until drawing.
@@ -94,45 +94,83 @@ char *termname = "st-256color";
 unsigned int tabspaces = 8;
 
 /* Terminal colors (16 first used in escape sequence) */
+// static const char *colorname[] = {
+// 	/* 8 normal colors */
+// 	"black",
+// 	"red3",
+// 	"green3",
+// 	"yellow3",
+// 	"blue2",
+// 	"magenta3",
+// 	"cyan3",
+// 	"gray90",
+//
+// 	/* 8 bright colors */
+// 	"gray50",
+// 	"red",
+// 	"green",
+// 	"yellow",
+// 	"#5c5cff",
+// 	"magenta",
+// 	"cyan",
+// 	"white",
+//
+// 	[255] = 0,
+//
+// 	/* more colors can be added after 255 to use with DefaultXX */
+// 	"#cccccc",
+// 	"#555555",
+// 	"gray90", /* default foreground colour */
+// 	"black", /* default background colour */
+// };
+
+/* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	"#7a828e", /* black */
+	"#ff9492", /* red */
+	"#26cd4d", /* green */
+	"#f0b72f", /* yellow */
+	"#71b7ff", /* blue */
+	"#cb9eff", /* magenta */
+	"#39c5cf", /* cyan */
+	"#d9dee3", /* white */
 
 	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	"#9ea7b3", /* bright black */
+	"#ffb1af", /* bright red */
+	"#4ae168", /* bright green */
+	"#f7c843", /* bright yellow */
+	"#91cbff", /* bright blue */
+	"#cb9eff", /* bright magenta */
+	"#39c5cf", /* bright cyan */
+	"#d9dee3", /* bright white */
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
-	"gray90", /* default foreground colour */
-	"black", /* default background colour */
+	"#f0f3f6", /* foreground color */
+	// "#0a0c10", /* background color - off black ish from alacritty yml*/
+	 "#000000", /* pure black ala default st */
+	"#f0f3f6", /* cursor color */
+	"#555555", /* reverse cursor color (you can keep or customize) */
 };
+
 
 
 /*
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 258;
-unsigned int defaultbg = 259;
-unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+// unsigned int defaultfg = 258;
+// unsigned int defaultbg = 259;
+// unsigned int defaultcs = 256;
+// static unsigned int defaultrcs = 257;
+
+unsigned int defaultfg = 256;
+unsigned int defaultbg = 257;
+unsigned int defaultcs = 258;
+static unsigned int defaultrcs = 259;
 
 /*
  * Default shape of cursor

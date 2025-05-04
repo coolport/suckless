@@ -874,8 +874,12 @@ drawbar(Monitor *m)
 
 	if ((w = m->ww - tw - stw - x) > bh) {
 		if (m->sel) {
+            /* fix overflow when window name is bigger than window width */
+			int mid = (m->ww - (int)TEXTW(m->sel->name)) / 2 - x;
+			/* make sure name will not overlap on tags even when it is very long */
+			mid = mid >= lrpad / 2 ? mid : lrpad / 2;
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
-			drw_text(drw, x, 0, w, bh, lrpad / 2, m->sel->name, 0);
+			drw_text(drw, x, 0, w, bh, mid, m->sel->name, 0);
 			if (m->sel->isfloating)
 				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
 		} else {
@@ -1497,26 +1501,12 @@ void
 resizeclient(Client *c, int x, int y, int w, int h)
 {
 	XWindowChanges wc;
-	unsigned int n;
-	Client *nbc;
 
 	c->oldx = c->x; c->x = wc.x = x;
 	c->oldy = c->y; c->y = wc.y = y;
 	c->oldw = c->w; c->w = wc.width = w;
 	c->oldh = c->h; c->h = wc.height = h;
 	wc.border_width = c->bw;
-
-	for (n = 0, nbc = nexttiled(c->mon->clients); nbc; nbc = nexttiled(nbc->next), n++);
-
-	if (c->isfloating || c->mon->lt[c->mon->sellt]->arrange == NULL) {
-	} else {
-		if (c->mon->lt[c->mon->sellt]->arrange == monocle || n == 1) {
-			wc.border_width = 0;
-			c->w = wc.width += c->bw * 2;
-			c->h = wc.height += c->bw * 2;
-		}
-	}
-
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
 	XSync(dpy, False);
@@ -2328,23 +2318,19 @@ void
 updatesystrayicongeom(Client *i, int w, int h)
 {
 	if (i) {
-		i->h = bh;
-		if (w == h)
-			i->w = bh;
-		else if (h == bh)
-			i->w = w;
-		else
-			i->w = (int) ((float)bh * ((float)w / (float)h));
-		applysizehints(i, &(i->x), &(i->y), &(i->w), &(i->h), False);
-		/* force icons into the systray dimensions if they don't want to */
-		if (i->h > bh) {
-			if (i->w == i->h)
-				i->w = bh;
-			else
-				i->w = (int) ((float)bh * ((float)i->w / (float)i->h));
-			i->h = bh;
-		}
-	}
+i->w = w = 20; // Set icon width to 16
+ 
+
+        i->h = h = 20; // Set icon height to 16
+ 
+
+		i->y = ((bh - h) / 2); // Calculate y to center icon vertically
+ 
+
+        XMoveResizeWindow(dpy, i->win, i->x, i->y, i->w, i->h);
+ 
+
+    }
 }
 
 void
@@ -2385,6 +2371,7 @@ updatesystray(void)
 	unsigned int x = m->mx + m->mw;
 	unsigned int sw = TEXTW(stext) - lrpad + systrayspacing;
 	unsigned int w = 1;
+	unsigned int y = ((bh - 20) / 2);
 
 	if (!showsystray)
 		return;
@@ -2422,7 +2409,8 @@ updatesystray(void)
 		XMapRaised(dpy, i->win);
 		w += systrayspacing;
 		i->x = w;
-		XMoveResizeWindow(dpy, i->win, i->x, 0, i->w, i->h);
+    i->y = y;
+		XMoveResizeWindow(dpy, i->win, i->x, i->y, i->w, i->h);
 		w += i->w;
 		if (i->mon != m)
 			i->mon = m;

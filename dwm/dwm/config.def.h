@@ -37,8 +37,15 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	// { "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	// { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	//  { "Thunar",  NULL,  NULL,  0,  1,  -1 },
+
+/* class      instance    title       tags mask     isfloating   monitor    float x,y,w,h         floatborderpx*/
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
+	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,        5 },
+	{ "Thunar",   NULL,       NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+
 };
 
 /* layout(s) */
@@ -106,6 +113,7 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = tmux } },
 	{ MODKEY,                       XK_m,      spawn,          {.v = tmux2 } },
 	{ MODKEY,                       XK_n,      spawn,          SHCMD("firefox") },
+	{ MODKEY,                       XK_period, spawn,          SHCMD("thunar") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },

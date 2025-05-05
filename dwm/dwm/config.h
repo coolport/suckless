@@ -1,6 +1,7 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
+#include <X11/XF86keysym.h>
 static const unsigned int borderpx  = 1;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -10,8 +11,8 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Iosevka Nerd Font:size=11" };
-static const char dmenufont[]       = "Iosevka Nerd Font:size=11";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=16" };
+static const char dmenufont[]       = "Iosevka Nerd Font:size=16";
 // static const char col_gray1[]       = "#222222";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
@@ -69,15 +70,36 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4,"-i", NULL };
 static const char *termcmd[]  = { "st", NULL };
 // static const char *tmux[] = { "st", "-e", "tmux new-session -A -s dev", NULL }; 
 static const char *deftmux[] = { "st", "-e", "tmux" , NULL };
 static const char *tmux[] = { "st", "-e", "tmux", "new-session", "-A", "-s", "dev", NULL };
 static const char *tmux2[] = { "st", "-e", "tmux", "new-session", "-A", "-s", "serv", NULL };
 
+static const char *mutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
+static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
+static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
+
+static const char *audiotoggle[] = { "playerctl", "play-pause", NULL };
+static const char *audionext[] = { "playerctl", "next", NULL };
+static const char *audioprev[] = { "playerctl", "previous", NULL };
+// migrate from i3
+static const char *brightup[] = { "brightnessctl", "set", "+10%", NULL };
+static const char *brightdown[] = {"brightnessctl", "set", "10%-", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
+  { 0,          XF86XK_AudioMute, spawn, {.v = mutecmd } },
+  { 0,          XF86XK_AudioLowerVolume, spawn, {.v = voldowncmd } },
+  { 0,          XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
+  { 0,          XF86XK_MonBrightnessUp, spawn, {.v = brightup} },
+  { 0,          XF86XK_MonBrightnessDown, spawn, {.v = brightdown} },
+
+  { 0,          XF86XK_AudioPlay, spawn, {.v = audiotoggle } },
+  { 0,          XF86XK_AudioPrev, spawn, {.v = audioprev} },
+  { 0,          XF86XK_AudioNext, spawn, {.v = audionext} },
+// ❯ XF86AudioPlay XF86AudioPrev, XF86AudioNext
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {.i = 23} },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = deftmux } },

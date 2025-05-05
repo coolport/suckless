@@ -1,5 +1,3 @@
-Minimal dwm config inspired by my original i3 setup
-Patches:
 dwm-actualfullscreen-20211013-cb3f58a.diff
 dwm-alwayscenter-20200625-f04cac6.diff
 dwm-attachaside-20180126-db22360.diff
@@ -10,3 +8,4 @@ dwm-fullgaps-20200508-7b77734.diff
 dwm-pertag-20200914-61bb8b2.diff
 dwm-removeborder-20220626-d3f93c7.diff
 dwm-systray-20230922-9f88553.diff
+patchlist

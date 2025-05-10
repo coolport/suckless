@@ -2,7 +2,7 @@
 
 /* appearance */
 #include <X11/XF86keysym.h>
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -24,7 +24,7 @@ static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
   ///bg in norm is bg of numbers and tray, bg when u dont have a window..
-	[SchemeSel]  = { col_gray4, col_gray1,  col_gray4  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 	// [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
   //bg in sel is big bg color in bar
 };
@@ -60,9 +60,14 @@ static const Layout layouts[] = {
 	// { "[]=",      tile },    /* first entry is default */
 	// { "><>",      NULL },    /* no layout function means floating behavior */
 	// { "[M]",      monocle },
-	{ "[T]",      tile },    /* first entry is default */
-	{ "[F]",      NULL },    /* no layout function means floating behavior */
-	{ "[M]",      monocle },
+  
+	// { "[T]",      tile },    /* first entry is default */
+	// { "[F]",      NULL },    /* no layout function means floating behavior */
+	// { "[M]",      monocle },
+
+	{ "",      tile },    /* first entry is default */
+	{ "",      NULL },    /* no layout function means floating behavior */
+	{ "",      monocle },
 };
 
 /* key definitions */
@@ -158,7 +163,6 @@ static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
-	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
 	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },

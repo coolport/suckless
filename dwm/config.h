@@ -2,7 +2,7 @@
 
 /* appearance */
 #include <X11/XF86keysym.h>
-static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
@@ -26,7 +26,7 @@ static const char col_purple[]      = "#10521d";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
   ///bg in norm is bg of numbers and tray, bg when u dont have a window..
 	// [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 	[SchemeSel]  = { col_gray4, col_purple,  col_purple  },
@@ -51,6 +51,7 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,       0,            1,           -1,        50,50,500,500,        5 },
 	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1,        50,50,500,500,        5 },
 	{ "Thunar",   NULL,       NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "Pavucontrol", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 
 };
 
@@ -94,6 +95,14 @@ static const char *termcmd[]  = { "st", NULL };
 static const char *deftmux[] = { "st", "-e", "tmux" , NULL };
 static const char *tmux[] = { "st", "-e", "tmux", "new-session", "-A", "-s", "dev", NULL };
 static const char *tmux2[] = { "st", "-e", "tmux", "new-session", "-A", "-s", "serv", NULL };
+static const char *pavucontrol[] = { "pavucontrol", NULL };
+
+// bindsym Print exec flameshot gui --path ~/Pictures/Screenshots/ --clipboard
+// bindsym Control+Print exec flameshot full --path ~/Pictures/Screenshots/ 
+// bindsym Shift+Print exec flameshot gui --clipboard
+// bindsym Control+Shift+Print exec flameshot gui --upload
+static const char *flameshot[] = { "flameshot", "gui", "--path", "/home/aidan/Pictures/Screenshots/", "--clipboard", NULL };
+static const char *flameshotc[] = { "flameshot", "gui", "--clipboard",NULL };
 
 static const char *mutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
@@ -121,7 +130,12 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_r,      quit,           {.i = 23} },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = deftmux } },
+	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = pavucontrol } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = tmux } },
+
+	{ 0,                            XK_Print,  spawn,          {.v = flameshot } },
+	{ 0,                            XK_Print,  spawn,          {.v = flameshotc } },
+
 	{ MODKEY,                       XK_m,      spawn,          {.v = tmux2 } },
 	{ MODKEY,                       XK_n,      spawn,          SHCMD("firefox") },
 	{ MODKEY,                       XK_period, spawn,          SHCMD("thunar") },

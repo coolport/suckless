@@ -54,6 +54,9 @@ static const Rule rules[] = {
 	{ "Pavucontrol", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 	{ "blueman-manager", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 	{ "Blueman-manager", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "nm-connection-editor", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "Nm-connection-editor", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+
 
 };
 

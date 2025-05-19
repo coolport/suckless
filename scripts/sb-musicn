@@ -1,0 +1,35 @@
+#!/bin/sh
+
+# Display currently playing music.
+
+case "$BLOCK_BUTTON" in
+1) musicctl prev ;;
+2) musicctl toggle ;;
+3) musicctl next ;;
+4) musicctl seek +5 ;;
+5) musicctl seek -5 ;;
+6) st -e "$EDITOR" "$0" ;;
+esac
+
+# Get status, suppress errors
+status="$(playerctl --no-messages status 2>/dev/null)" || exit 0
+
+# Only continue if Playing or Paused
+[ "$status" = "Playing" ] || [ "$status" = "Paused" ] || exit 0
+
+# Choose icon
+case "$status" in
+Paused) icon="" ;;  # pause icon
+Playing) icon="" ;; # play icon
+esac
+
+# Get song info
+song="$(playerctl metadata --format="{{artist}} - {{title}}" 2>/dev/null)"
+
+# Don't display if no song info
+[ -n "$song" ] || exit 0
+
+# Optional theming (safe to skip if it causes issues)
+[ -f sb-theme ] && . sb-theme && display "$icon  $song" || echo "$icon  $song"
+
+exit 0

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-case "$BUTTON" in
+case "$BLOCK_BUTTON" in
 1) notify-send "Left click detected on test block" ;;
 2) notify-send "Middle click detected on test block" ;;
 3) notify-send "Right click detected on test block" ;;

@@ -1,3 +1,4 @@
 #!/bin/sh
 
-date '+%b %d (%a) %I:%M:%S%p'
+# date '+%b %d (%a) %I:%M%p'
+echo "󰥔  $(date '+%b %d (%a) %I:%M%p')"

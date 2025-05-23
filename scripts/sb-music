@@ -2,19 +2,19 @@
 # Display currently playing music.
 
 case "$BLOCK_BUTTON" in
-    1) musicctl prev ;;
-    2) musicctl toggle ;;
-    3) musicctl next ;;
-    4) musicctl seek +5 ;;
-    5) musicctl seek -5 ;;
-    6) terminal -e "$EDITOR" "$0" ;;
+1) musicctl prev ;;
+2) musicctl toggle ;;
+3) musicctl next ;;
+4) musicctl seek +5 ;;
+5) musicctl seek -5 ;;
+6) terminal -e "$EDITOR" "$0" ;;
 esac
 
 status="$(playerctl --no-messages status)" || exit 1
 case "$status" in
-    Stopped) exit ;;
-    Paused) icon="" ;;
-    Playing) icon="󰝚" ;;
+Stopped) exit ;;
+Paused) icon="" ;;
+Playing) icon="" ;;
 esac
 
 song="$(playerctl metadata --format="{{title}} - {{artist}}")" || exit 2

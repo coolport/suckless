@@ -2,45 +2,45 @@
 # Display volume levels.
 
 wpctl() {
-    arg="$2"
+  arg="$2"
 
-    set -- "$1"
-    if [ "$1" = set-volume ]; then
-        set -- "$@" --limit=1.0
-    fi
+  set -- "$1"
+  if [ "$1" = set-volume ]; then
+    set -- "$@" --limit=1.0
+  fi
 
-    set -- "$@" @DEFAULT_AUDIO_SINK@ "$arg"
+  set -- "$@" @DEFAULT_AUDIO_SINK@ "$arg"
 
-    command wpctl "$@"
+  command wpctl "$@"
 }
 
 case "$BLOCK_BUTTON" in
-    1) setsid --fork terminal -e pulsemixer ;;
-    2) wpctl set-mute toggle ;;
-    4) wpctl set-volume 3%+ ;;
-    5) wpctl set-volume 3%- ;;
-    6) terminal -e "$EDITOR" "$0" ;;
+1) pactl set-sink-mute 0 "toggle" ;;
+3) setsid --fork terminal -e pulsemixer ;;
+4) pactl set-sink-volume 0 +5% ;;
+5) pactl set-sink-volume 0 -5% ;;
+6) terminal -e "$EDITOR" "$0" ;;
 esac
 
 . sb-theme
 if wpctl get-volume | grep -q "[MUTED]"; then
-    display " " 9
-    exit
+  display " " 9
+  exit
 fi
 
 volume_frac="$(wpctl get-volume | cut -d' ' -f2)"
 volume="$(echo "$volume_frac * 100 / 1" | bc)"
 
 if [ -z "$volume" ]; then
-    exit 1
+  exit 1
 fi
 
 if [ "$volume" -gt 40 ]; then
-    icon=" "
+  icon=" "
 elif [ "$volume" -gt 15 ]; then
-    icon=" "
+  icon=" "
 else
-    icon=" "
+  icon=" "
 fi
 
 display "$icon$volume%"

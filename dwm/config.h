@@ -54,6 +54,9 @@ static const Rule rules[] = {
 	{ "Pavucontrol", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 	{ "blueman-manager", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 	{ "Blueman-manager", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "nm-connection-editor", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "Nm-connection-editor", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+
 
 };
 
@@ -186,11 +189,14 @@ static const Key keys[] = {
 /* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static const Button buttons[] = {
 	/* click                event mask      button          function        argument */
-	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
-	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
+	// { ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
+	// { ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkStatusText,        0,              Button1,        sigstatusbar,   {.i = 1} },
 	{ ClkStatusText,        0,              Button2,        sigstatusbar,   {.i = 2} },
 	{ ClkStatusText,        0,              Button3,        sigstatusbar,   {.i = 3} },
+	{ ClkStatusText,        0,              Button4,        sigstatusbar,   {.i = 4} },
+	{ ClkStatusText,        0,              Button5,        sigstatusbar,   {.i = 5} },
+
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },

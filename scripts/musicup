@@ -3,5 +3,5 @@
 # Supports MPRIS-compatible music players.
 
 playerctl metadata --follow --format "{{title}}{{artist}}{{status}}" | while read -r _; do
-    pkill -RTMIN+2 "$STATUSBAR"
+  pkill -RTMIN+2 "$STATUSBAR"
 done

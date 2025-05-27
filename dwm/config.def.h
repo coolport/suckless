@@ -104,6 +104,7 @@ static const char *tmux[] = { "st", "-e", "tmux", "new-session", "-A", "-s", "de
 static const char *tmux2[] = { "st", "-e", "tmux", "new-session", "-A", "-s", "serv", NULL };
 static const char *pavucontrol[] = { "pavucontrol", NULL };
 static const char *blueman_manager[] = { "blueman-manager", NULL };
+static const char *network_editor[] = { "nm-connection-editor", NULL };
 
 // bindsym Print exec flameshot gui --path ~/Pictures/Screenshots/ --clipboard
 // bindsym Control+Print exec flameshot full --path ~/Pictures/Screenshots/ 
@@ -140,6 +141,7 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = deftmux } },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = pavucontrol } },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = blueman_manager } },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = network_editor } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = tmux } },
 
 	{ 0,                            XK_Print,  spawn,          {.v = flameshot } },

@@ -5,7 +5,7 @@
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int gappx     = 5;        /* gaps between windows */
 static const unsigned int snap      = 32;       /* snap pixel */
-static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
+static const unsigned int systraypinning = 1;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;    /* 0: systray in the right corner, >0: systray on left of status text */
 static const unsigned int systrayspacing = 4;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
@@ -29,7 +29,7 @@ static const char *colors[][3]      = {
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
   ///bg in norm is bg of numbers and tray, bg when u dont have a window..
 	// [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeSel]  = { col_gray4, col_purple,  col_purple  },
+	[SchemeSel]  = { col_gray4, col_gray1,  col_gray2  },
 	// [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
   //bg in sel is big bg color in bar
 };
@@ -105,6 +105,7 @@ static const char *tmux2[] = { "st", "-e", "tmux", "new-session", "-A", "-s", "s
 static const char *pavucontrol[] = { "pavucontrol", NULL };
 static const char *blueman_manager[] = { "blueman-manager", NULL };
 static const char *network_editor[] = { "nm-connection-editor", NULL };
+static const char *spotify[] = { "spotify", NULL };
 
 // bindsym Print exec flameshot gui --path ~/Pictures/Screenshots/ --clipboard
 // bindsym Control+Print exec flameshot full --path ~/Pictures/Screenshots/ 
@@ -145,11 +146,13 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Return, spawn,          {.v = tmux } },
 
 	{ 0,                            XK_Print,  spawn,          {.v = flameshot } },
-	{ 0,                            XK_Print,  spawn,          {.v = flameshotc } },
+	{ 0|ShiftMask,                            XK_Print,  spawn,          {.v = flameshotc } },
 
 	{ MODKEY,                       XK_m,      spawn,          {.v = tmux2 } },
 	{ MODKEY,                       XK_n,      spawn,          SHCMD("firefox") },
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("spotify") },
 	{ MODKEY,                       XK_period, spawn,          SHCMD("thunar") },
+	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("thunar") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -161,9 +164,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_Tab,    view,           {0} },
 	{ MODKEY|ShiftMask,             XK_q,      killclient,     {0} },
 	{ MODKEY,                       XK_t,      setlayout,      {.v = &layouts[0]} },
-	{ MODKEY|ShiftMask,             XK_f,      setlayout,      {.v = &layouts[1]} },
+	{ MODKEY|ControlMask,           XK_f,      setlayout,      {.v = &layouts[1]} },
+  { MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
+
   { MODKEY,                       XK_f,      togglefullscr,  {0} },
-	{ MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },

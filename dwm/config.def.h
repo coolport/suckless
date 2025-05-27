@@ -16,7 +16,7 @@ static const int topbar             = 1;        /* 0 means bottom bar */
 // static const char dmenufont[]       = "Iosevka Nerd Font:size=16";
 static const char *fonts[]          = { "Iosevka Nerd Font:size=10" };
 static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
-// static const char col_gray1[]       = "#222222";
+static const char col_gray[]       = "#222222";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
@@ -26,7 +26,7 @@ static const char col_purple[]      = "#10521d";
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
+	[SchemeNorm] = { col_gray3, col_gray, col_gray1 },
   ///bg in norm is bg of numbers and tray, bg when u dont have a window..
 	// [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 	[SchemeSel]  = { col_gray4, col_gray1,  col_gray2  },

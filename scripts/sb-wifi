@@ -1,0 +1,14 @@
+#!/bin/sh
+
+wifi=$(nmcli device | grep wlp0s20f3 | awk -F ' connected' '{print $2}' | xargs)
+# ethernet=$(nmcli device | grep ethernet)
+
+echo "  $wifi"
+
+# if [ "$ethernet" != "" ]; then
+#   echo "󰈀 "
+# elif [ "$wifi" == "" ]; then
+#   echo "睊"
+# else
+#   echo "直 $wifi" | xargs
+# fi

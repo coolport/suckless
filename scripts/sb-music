@@ -2,22 +2,22 @@
 # Display currently playing music.
 
 case "$BLOCK_BUTTON" in
-1) musicctl prev ;;
-2) musicctl toggle ;;
-3) musicctl next ;;
-4) musicctl seek +5 ;;
-5) musicctl seek -5 ;;
+2) playerctl previous ;;
+1) playerctl play-pause ;;
+3) playerctl next ;;
+4) playerctl position 5+ ;;
+5) playerctl position 5- ;;
 6) terminal -e "$EDITOR" "$0" ;;
 esac
 
 status="$(playerctl --no-messages status)" || exit 1
 case "$status" in
 Stopped) exit ;;
-Paused) icon="" ;;
-Playing) icon="" ;;
+Paused) icon="" ;;
+Playing) icon="" ;;
 esac
 
-song="$(playerctl metadata --format="{{title}} - {{artist}}")" || exit 2
+song="$(playerctl metadata --format="{{artist}} - {{title}}")" || exit 2
 
 . sb-theme
 display "$icon $song"

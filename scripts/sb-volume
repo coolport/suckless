@@ -43,4 +43,4 @@ else
   icon=" "
 fi
 
-display "$icon$volume%"
+display "$icon $volume%"

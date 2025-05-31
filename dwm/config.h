@@ -40,7 +40,7 @@ static const char *colors[][3]      = {
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
     [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, OPAQUE, borderalpha },
+	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
 };
 
 /* tagging */
@@ -160,7 +160,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_m,      spawn,          {.v = tmux2 } },
 	{ MODKEY,                       XK_n,      spawn,          SHCMD("firefox") },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("spotify") },
-	{ MODKEY,                       XK_period, spawn,          SHCMD("thunar") },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("thunar") },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },

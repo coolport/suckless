@@ -25,6 +25,7 @@ static const char col_gray4[]       = "#eeeeee";
 static const char col_cyan[]        = "#478061";
 static const char col_purple[]      = "#10521d";
 static const unsigned int baralpha = 0x80;
+static const unsigned int middy = 0x50;
 static const unsigned int borderalpha = 0x00;
 
 static const char *colors[][3]      = {
@@ -40,7 +41,7 @@ static const char *colors[][3]      = {
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
     [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, borderalpha },
+	[SchemeSel]  = { OPAQUE, baralpha, middy },
 };
 
 /* tagging */
@@ -181,8 +182,10 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_d,      focusmon,       {.i = -1 } },
-	// { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_d,      tagmon,         {.i = -1 } },
+	{ MODKEY,                       XK_q,      focusmon,       {.i = -1 } },
+	{ MODKEY|ControlMask,             XK_q,      tagmon,         {.i = -1 } },
+  // { MODKEY,                       XK_period, focusmon,       {.i = +1 } },
 	// { MODKEY|ShiftMask,             XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },

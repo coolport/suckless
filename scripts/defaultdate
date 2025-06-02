@@ -3,4 +3,4 @@
 # date '+%b %d (%a) %I:%M%p'
 # echo "󰥔  $(date '+%b %d (%a) %I:%M%p')"
 
-echo "  $(date '+%b %d, %H:%M')"
+echo "  $(date '+%a, %b %d, %H:%M')"

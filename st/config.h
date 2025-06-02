@@ -105,6 +105,10 @@ char *termname = "st-256color";
  */
 unsigned int tabspaces = 8;
 
+/* bg opacity */
+float alpha = 0.8;
+float alpha_def;
+
 /* Terminal colors (16 first used in escape sequence) */
 // static const char *colorname[] = {
 // 	/* 8 normal colors */
@@ -234,7 +238,7 @@ static MouseShortcut mshortcuts[] = {
 };
 
 /* Internal keyboard shortcuts. */
-#define MODKEY Mod1Mask
+#define MODKEY Mod4Mask
 #define TERMMOD (ControlMask|ShiftMask)
 
 static Shortcut shortcuts[] = {
@@ -251,6 +255,9 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+  { MODKEY,               XK_bracketleft,  chgalpha,       {.f = -1} }, /* Decrease opacity with [ */
+  { MODKEY,               XK_bracketright, chgalpha,       {.f = +1} }, /* Increase opacity with ] */
+  { MODKEY|ShiftMask,     XK_bracketright, chgalpha,       {.f =  0} }, /* Reset opacity with } (Shift+]) */
 };
 
 /*

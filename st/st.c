@@ -1019,8 +1019,6 @@ treset(void)
 	}, .x = 0, .y = 0, .state = CURSOR_DEFAULT};
 
 	memset(term.tabs, 0, term.col * sizeof(*term.tabs));
-	for (i = tabspaces; i < term.col; i += tabspaces)
-		term.tabs[i] = 1;
 	term.top = 0;
 	term.bot = term.row - 1;
 	term.mode = MODE_WRAP|MODE_UTF8;
@@ -2599,8 +2597,6 @@ tresize(int col, int row)
 		memset(bp, 0, sizeof(*term.tabs) * (col - term.col));
 		while (--bp > term.tabs && !*bp)
 			/* nothing */ ;
-		for (bp += tabspaces; bp < term.tabs + col; bp += tabspaces)
-			*bp = 1;
 	}
 	/* update terminal size */
 	term.col = col;

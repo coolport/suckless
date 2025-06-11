@@ -135,6 +135,8 @@ static const char *audioprev[] = { "playerctl", "previous", NULL };
 static const char *brightup[] = { "brightnessctl", "set", "+10%", NULL };
 static const char *brightdown[] = {"brightnessctl", "set", "10%-", NULL };
 
+static const char *touchpad[] = {"touchpad", NULL };
+
 static const Key keys[] = {
 	/* modifier                     key        function        argument */
   { 0,          XF86XK_AudioMute, spawn, {.v = mutecmd } },
@@ -142,6 +144,7 @@ static const Key keys[] = {
   { 0,          XF86XK_AudioRaiseVolume, spawn, {.v = volupcmd } },
   { 0,          XF86XK_MonBrightnessUp, spawn, {.v = brightup} },
   { 0,          XF86XK_MonBrightnessDown, spawn, {.v = brightdown} },
+
 
   { 0,          XF86XK_AudioPlay, spawn, {.v = audiotoggle } },
   { 0,          XF86XK_AudioPrev, spawn, {.v = audioprev} },
@@ -155,6 +158,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = network_editor } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = tmux } },
 
+	// { 0,                            XK_F6,     spawn,          {.v = touchpad } },
+  { MODKEY|ShiftMask,                            XK_t,     spawn,          SHCMD("~/.xtoggle_touchpad.sh") },
 	{ 0,                            XK_Print,  spawn,          {.v = flameshot } },
 	{ 0|ShiftMask,                            XK_Print,  spawn,          {.v = flameshotc } },
 

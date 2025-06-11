@@ -18,6 +18,7 @@ Playing) icon="" ;;
 esac
 
 song="$(playerctl metadata --format="{{artist}} - {{title}}")" || exit 2
+song2="$(playerctl metadata --format="{{artist}}")" || exit 2
 
 . sb-theme
-display "$icon $song"
+display "$icon $song2"

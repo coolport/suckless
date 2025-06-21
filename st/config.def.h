@@ -5,7 +5,11 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Iosevka Nerd Font:pixelsize=18:antialias=true:autohint=true";
+
+
+// static char *font = "Iosevka Nerd Font:pixelsize=18:antialias=true:autohint=true";
+// static char *font = "DepartureMono Nerd Font Mono:pixelsize=18:antialias=true:autohint=true";
+static char *font = "ComicShannsMono Nerd Font:pixelsize=18:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*

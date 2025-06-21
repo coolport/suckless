@@ -13,10 +13,10 @@ static const int showsystray        = 0;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-// static const char *fonts[]          = { "Iosevka Nerd Font:size=16" };
-// static const char dmenufont[]       = "Iosevka Nerd Font:size=16";
-static const char *fonts[]          = { "Iosevka Nerd Font:size=10" };
-static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=16" };
+static const char dmenufont[]       = "Iosevka Nerd Font:size=16";
+// static const char *fonts[]          = { "Iosevka Nerd Font:size=10" };
+// static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
 static const char col_gray[]       = "#222222";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
@@ -40,8 +40,8 @@ static const char *colors[][3]      = {
 
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, baralpha, borderalpha },
-	[SchemeSel]  = { OPAQUE, baralpha, middy },
+    [SchemeNorm] = { OPAQUE, baralpha, OPAQUE },
+	[SchemeSel]  = { OPAQUE, baralpha, OPAQUE },
 };
 
 /* tagging */
@@ -66,6 +66,9 @@ static const Rule rules[] = {
 	{ "Blueman-manager", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 	{ "nm-connection-editor", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 	{ "Nm-connection-editor", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "alacritty", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "Alacritty", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
+	{ "kitty", NULL,    NULL,       0     ,       1,           -1,        50,50,1300,800,        5 },
 
 
 };
@@ -82,13 +85,13 @@ static const Layout layouts[] = {
 	// { "><>",      NULL },    /* no layout function means floating behavior */
 	// { "[M]",      monocle },
   
-	// { "[T]",      tile },    /* first entry is default */
-	// { "[F]",      NULL },    /* no layout function means floating behavior */
-	// { "[M]",      monocle },
-
 	{ "",      tile },    /* first entry is default */
-	{ "",      NULL },    /* no layout function means floating behavior */
-	{ "",      monocle },
+	{ "[F]",      NULL },    /* no layout function means floating behavior */
+	{ "[M]",      monocle },
+
+	// { "",      tile },    /* first entry is default */
+	// { "",      NULL },    /* no layout function means floating behavior */
+	// { "",      monocle },
 };
 
 /* key definitions */
@@ -157,6 +160,8 @@ static const Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = blueman_manager } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = network_editor } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = tmux } },
+	{ MODKEY,                       XK_slash,  spawn,          SHCMD("alacritty") },
+	{ MODKEY|ShiftMask,              XK_slash,  spawn,          SHCMD("kitty") },
 
 	// { 0,                            XK_F6,     spawn,          {.v = touchpad } },
   { MODKEY|ShiftMask,                            XK_t,     spawn,          SHCMD("~/.xtoggle_touchpad.sh") },

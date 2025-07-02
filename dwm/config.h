@@ -13,10 +13,12 @@ static const int showsystray        = 0;        /* 0 means no systray */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int focusonwheel       = 0;
-static const char *fonts[]          = { "Iosevka Nerd Font:size=16" };
-static const char dmenufont[]       = "Iosevka Nerd Font:size=16";
-// static const char *fonts[]          = { "Iosevka Nerd Font:size=10" };
-// static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
+
+// static const char *fonts[]          = { "Iosevka Nerd Font:size=16" };
+// static const char dmenufont[]       = "Iosevka Nerd Font:size=16";
+static const char *fonts[]          = { "Iosevka Nerd Font:size=10" };
+static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
+
 static const char col_gray[]       = "#222222";
 static const char col_gray1[]       = "#000000";
 static const char col_gray2[]       = "#444444";
@@ -45,7 +47,7 @@ static const unsigned int alphas[][3]      = {
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6"};
+static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -128,8 +130,8 @@ static const char *flameshot[] = { "flameshot", "gui", "--path", "/home/aidan/Pi
 static const char *flameshotc[] = { "flameshot", "gui", "--clipboard",NULL };
 
 static const char *mutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
-static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+5%", NULL };
-static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-5%", NULL };
+static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+10%", NULL };
+static const char *voldowncmd[] = { "pactl", "set-sink-volume", "0", "-10%", NULL };
 
 static const char *audiotoggle[] = { "playerctl", "play-pause", NULL };
 static const char *audionext[] = { "playerctl", "next", NULL };
@@ -137,6 +139,7 @@ static const char *audioprev[] = { "playerctl", "previous", NULL };
 // migrate from i3
 static const char *brightup[] = { "brightnessctl", "set", "+10%", NULL };
 static const char *brightdown[] = {"brightnessctl", "set", "10%-", NULL };
+static const char *ocr[] = {"ocrscreenshot", NULL };
 
 static const char *touchpad[] = {"touchpad", NULL };
 
@@ -166,12 +169,14 @@ static const Key keys[] = {
 	// { 0,                            XK_F6,     spawn,          {.v = touchpad } },
   { MODKEY|ShiftMask,                            XK_t,     spawn,          SHCMD("~/.xtoggle_touchpad.sh") },
 	{ 0,                            XK_Print,  spawn,          {.v = flameshot } },
-	{ 0|ShiftMask,                            XK_Print,  spawn,          {.v = flameshotc } },
+  { 0|ShiftMask,                  XK_Print,  spawn,          {.v = flameshotc } },
+  { 0|ControlMask,                  XK_Print,  spawn,          {.v = ocr } },
 
 	{ MODKEY,                       XK_m,      spawn,          {.v = tmux2 } },
 	{ MODKEY,                       XK_n,      spawn,          SHCMD("firefox") },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          SHCMD("spotify") },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          SHCMD("thunar") },
+
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -186,9 +191,12 @@ static const Key keys[] = {
 	{ MODKEY|ControlMask,           XK_f,      setlayout,      {.v = &layouts[1]} },
   { MODKEY|ShiftMask,             XK_m,      setlayout,      {.v = &layouts[2]} },
 
+
+
   { MODKEY,                       XK_f,      togglefullscr,  {0} },
 	{ MODKEY,                       XK_space,  setlayout,      {0} },
 	{ MODKEY|ShiftMask,             XK_space,  togglefloating, {0} },
+  { MODKEY|ShiftMask,             XK_j,      focusmaster,    {0} },
 	{ MODKEY,                       XK_0,      view,           {.ui = ~0 } },
 	{ MODKEY|ShiftMask,             XK_0,      tag,            {.ui = ~0 } },
 	{ MODKEY,                       XK_d,      focusmon,       {.i = -1 } },
@@ -200,6 +208,9 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
+
+
+
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)

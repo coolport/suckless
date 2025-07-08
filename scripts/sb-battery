@@ -3,7 +3,6 @@
 
 notify() {
   notify-send \
-    --icon=battery-good-symbolic \
     --expire-time=4000 \
     --hint=string:x-canonical-private-synchronous:battery \
     "Battery" "$1"

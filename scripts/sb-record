@@ -4,7 +4,7 @@
 PID_FILE=/tmp/record.pid
 
 if [ ! -f "$PID_FILE" ]; then
-    exit
+  exit
 fi
 
 . sb-theme

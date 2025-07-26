@@ -1,0 +1,15 @@
+#!/bin/sh
+# Displays RAM and CPU usage as percentages.
+
+case "$BLOCK_BUTTON" in
+6) terminal -e "$EDITOR" "$0" ;;
+esac
+
+# RAM usage as a percentage
+ram_perc="$(free -m | awk '/^Mem:/ {printf "%.0f", $3*100/$2}')"
+
+# CPU usage as a percentage
+cpu_perc="$(mpstat 1 1 | awk '/Average/ {printf "%.0f", 100 - $NF}')"
+
+. sb-theme
+display "  ${ram_perc}%:${cpu_perc}%"

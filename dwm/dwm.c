@@ -20,6 +20,7 @@
  *
  * To understand everything else, start reading main().
  */
+#include <X11/cursorfont.h>
 #include <errno.h>
 #include <locale.h>
 #include <signal.h>
@@ -1605,8 +1606,9 @@ resizeclient(Client *c, int x, int y, int w, int h)
 {
 	XWindowChanges wc;
   // uncomment for removeborder patch - aidan may 27, 2025
-	unsigned int n;
-	Client *nbc;
+	// unsigned int n;
+	// Client *nbc;
+  // uncomment for removeborder patch - aidan may 27, 2025
 
 	c->oldx = c->x; c->x = wc.x = x;
 	c->oldy = c->y; c->y = wc.y = y;
@@ -1618,16 +1620,17 @@ resizeclient(Client *c, int x, int y, int w, int h)
 	else
 		wc.border_width = c->bw;
   // uncomment for removeborder patch - aidan may 27, 2025
-    for (n = 0, nbc = nexttiled(c->mon->clients); nbc; nbc = nexttiled(nbc->next), n++);
-
-    if (c->isfloating || c->mon->lt[c->mon->sellt]->arrange == NULL) {
-    } else {
-      if (c->mon->lt[c->mon->sellt]->arrange == monocle || n == 1) {
-        wc.border_width = 0;
-        c->w = wc.width += c->bw * 2;
-        c->h = wc.height += c->bw * 2;
-      }
-    }
+    // for (n = 0, nbc = nexttiled(c->mon->clients); nbc; nbc = nexttiled(nbc->next), n++);
+    //
+    // if (c->isfloating || c->mon->lt[c->mon->sellt]->arrange == NULL) {
+    // } else {
+    //   if (c->mon->lt[c->mon->sellt]->arrange == monocle || n == 1) {
+    //     wc.border_width = 0;
+    //     c->w = wc.width += c->bw * 2;
+    //     c->h = wc.height += c->bw * 2;
+    //   }
+    // }
+  // uncomment for removeborder patch - aidan may 27, 2025
 	XConfigureWindow(dpy, c->win, CWX|CWY|CWWidth|CWHeight|CWBorderWidth, &wc);
 	configure(c);
 	XSync(dpy, False);
@@ -2314,12 +2317,19 @@ updatebars(void)
 		w = m->ww;
 		if (showsystray && m == systraytomon(m))
 			w -= getsystraywidth();
+
 		m->barwin = XCreateWindow(dpy, root, m->wx, m->by, m->ww, bh, 0, depth,
-				InputOutput, visual,
-				CWOverrideRedirect|CWBackPixel|CWBorderPixel|CWColormap|CWEventMask, &wa);
-		XDefineCursor(dpy, m->barwin, cursor[CurNormal]->cursor);
+		                          InputOutput, visual,
+		                          CWOverrideRedirect|CWBackPixel|CWBorderPixel|CWColormap|CWEventMask, &wa);
+
+    // fix changing cursors
+    // ADD CURSOR DEFINITION, ALLOW DWMBAR TO USE X CURSOR
+		Cursor cursor = XCreateFontCursor(dpy, XC_left_ptr);
+		XDefineCursor(dpy, m->barwin, cursor);
+
 		if (showsystray && m == systraytomon(m))
 			XMapRaised(dpy, systray->win);
+
 		XMapRaised(dpy, m->barwin);
 		XSetClassHint(dpy, m->barwin, &ch);
 	}

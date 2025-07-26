@@ -32,12 +32,13 @@ static const unsigned int borderalpha = 0x00;
 
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
-  ///bg in norm is bg of numbers and tray, bg when u dont have a window..
-	// [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-	[SchemeSel]  = { col_gray4, col_gray1,  col_gray2  },
-	// [SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
-  //bg in sel is big bg color in bar
+  // Greenline
+	// [SchemeNorm] = { col_gray3, col_gray1, col_gray1 },
+	//  [SchemeSel]  = { col_gray4, col_purple,  col_purple },
+
+  //Normal
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray },
+  [SchemeSel]  = { col_gray4, col_gray1,  col_gray2 },
 };
 
 static const unsigned int alphas[][3]      = {

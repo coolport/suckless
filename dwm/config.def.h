@@ -43,12 +43,12 @@ static const char *colors[][3]      = {
 
 static const unsigned int alphas[][3]      = {
     /*               fg      bg        border*/
-    [SchemeNorm] = { OPAQUE, baralpha, OPAQUE },
-	[SchemeSel]  = { OPAQUE, baralpha, OPAQUE },
+    [SchemeNorm] = { OPAQUE, baralpha, baralpha },
+	[SchemeSel]  = { OPAQUE, baralpha, middy },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+static const char *tags[] = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -129,6 +129,9 @@ static const char *spotify[] = { "spotify", NULL };
 // bindsym Control+Shift+Print exec flameshot gui --upload
 static const char *flameshot[] = { "flameshot", "gui", "--path", "/home/aidan/Pictures/Screenshots/", "--clipboard", NULL };
 static const char *flameshotc[] = { "flameshot", "gui", "--clipboard",NULL };
+static const char *flameshotoneshot[] = { "flameshot", "gui", "--path", "/home/aidan/Pictures/Screenshots/", "--accept-on-select", NULL };
+static const char *ocr[] = {"ocrscreenshot", NULL };
+static const char *qr[] = {"qrscreenshot", NULL };
 
 static const char *mutecmd[] = { "pactl", "set-sink-mute", "0", "toggle", NULL };
 static const char *volupcmd[] = { "pactl", "set-sink-volume", "0", "+10%", NULL };
@@ -140,7 +143,6 @@ static const char *audioprev[] = { "playerctl", "previous", NULL };
 // migrate from i3
 static const char *brightup[] = { "brightnessctl", "set", "+10%", NULL };
 static const char *brightdown[] = {"brightnessctl", "set", "10%-", NULL };
-static const char *ocr[] = {"ocrscreenshot", NULL };
 
 static const char *touchpad[] = {"touchpad", NULL };
 
@@ -171,7 +173,9 @@ static const Key keys[] = {
   { MODKEY|ShiftMask,                            XK_t,     spawn,          SHCMD("~/.xtoggle_touchpad.sh") },
 	{ 0,                            XK_Print,  spawn,          {.v = flameshot } },
   { 0|ShiftMask,                  XK_Print,  spawn,          {.v = flameshotc } },
-  { 0|ControlMask,                  XK_Print,  spawn,          {.v = ocr } },
+  { 0|ControlMask,                XK_Print,  spawn,          {.v = ocr } },
+  { 0|ControlMask|ShiftMask,      XK_Print,  spawn,          {.v = qr } },
+  { MODKEY|ControlMask|ShiftMask, XK_f,      spawn,          {.v = flameshotoneshot } },
 
 	{ MODKEY,                       XK_m,      spawn,          {.v = tmux2 } },
 	{ MODKEY,                       XK_n,      spawn,          SHCMD("firefox") },

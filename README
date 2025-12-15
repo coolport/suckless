@@ -1,0 +1,35 @@
+Personal builds of the suckless programs dwm and st, patched and configured to work with modern workflows. Perfect for use in minimal install distros. Overview:
+
+dwm - lightly inspired by my previous i3 setup, lots of QoL configs, bindings for special laptop keys, float rules, etc etc. Patched generously which means a lot of conflicts had to be resolved, it works great as a whole.
+
+Patch list:
+dwm-systray-20230922-9f88553.diff
+dwm-floatrules-20210801-138b405.diff
+dwm-actualfullscreen-20211013-cb3f58a.diff
+dwm-alwayscenter-20200625-f04cac6.diff
+dwm-attachaside-20180126-db22360.diff
+dwm-attachbelow-6.2.diff
+dwm-centeredwindowname-20200723-f035e1e.diff
+dwm-fullgaps-20200508-7b77734.diff
+dwm-pertag-20200914-61bb8b2.diff
+dwm-removeborder-20220626-d3f93c7.diff
+dwm-resizecorners-6.5.diff
+dwm-preserveonrestart-6.3.diff
+dwm-notitle-20210715-138b405.diff
+dwm-focusmaster-return-20210804-138b405.diff
+dwm-focusonclick-20200110-61bb8b2.diff
+dwm-alpha-20230401-348f655.diff
+
+---
+
+st - patched to fix old issues like box rendering etc, overall configured for basic qol stuff, look nice, and not get in the way of tmux.
+
+Patch list:
+st-boxdraw_v2-0.8.5.diff
+st-anysize-20220718-baa9357.diff
+st-clipboard-20180309-c5ba9c0.diff
+st-bold-is-not-bright-20190127-3be4cf1.diff
+
+---
+
+dwmblocks-async - not an official suckless program but serves as the status bar for my system. Most of the work here is in signal handling, properly integrating it with dwm, and stealing / setting up the scripts.

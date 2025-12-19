@@ -1,4 +1,4 @@
-Personal builds of the suckless programs dwm and st, patched and configured to work with modern workflows. Perfect for use in minimal install distros. Overview:
+Personal builds of the suckless programs dwm and st, patched and configured to work with modern workflows. Perfect for use in minimal install distros. Patched from scratch on version 6.5 (dwm) and 0.9.2 (st). Overview:
 
 dwm - lightly inspired by my previous i3 setup, lots of QoL configs, bindings for special laptop keys, float rules, etc etc. Patched generously which means a lot of conflicts had to be resolved, it works great as a whole.
 
